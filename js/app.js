@@ -671,6 +671,109 @@ function initGallery() {
 }
 
 /* ───────────────────────────────────────
+   LIGHTBOX
+─────────────────────────────────────── */
+function initLightbox() {
+  // Build modal DOM
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.id = 'lightbox';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.innerHTML = `
+    <button class="lightbox-close" id="lbClose" aria-label="Zapri">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Prejšnji">&#8592;</button>
+    <div class="lightbox-wrap">
+      <img class="lightbox-img" id="lbImg" src="" alt="">
+      <div class="lightbox-cap">
+        <h3 id="lbTitle"></h3>
+        <p  id="lbDesc"></p>
+      </div>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Naslednji">&#8594;</button>
+    <span class="lightbox-counter" id="lbCounter"></span>
+  `;
+  document.body.appendChild(lb);
+
+  let items   = [];
+  let current = 0;
+
+  function visibleItems() {
+    return Array.from(document.querySelectorAll('#galGrid .gal-item:not(.hidden)'));
+  }
+
+  function show() {
+    const item  = items[current];
+    const imgEl = item.querySelector('.gal-img');
+    const url   = imgEl.style.backgroundImage.replace(/url\(['"]?(.+?)['"]?\)/, '$1');
+    const title = item.querySelector('.gal-cap h3')?.textContent || '';
+    const desc  = item.querySelector('.gal-cap p')?.textContent  || '';
+
+    const lbImg = document.getElementById('lbImg');
+    lbImg.src = url;
+    lbImg.alt = title;
+    document.getElementById('lbTitle').textContent   = title;
+    document.getElementById('lbDesc').textContent    = desc;
+    document.getElementById('lbCounter').textContent = `${current + 1} / ${items.length}`;
+
+    const single = items.length <= 1;
+    document.getElementById('lbPrev').classList.toggle('hidden', single);
+    document.getElementById('lbNext').classList.toggle('hidden', single);
+  }
+
+  function open(index) {
+    items   = visibleItems();
+    current = Math.max(0, Math.min(index, items.length - 1));
+    show();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lbClose').focus();
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function prev() { current = (current - 1 + items.length) % items.length; show(); }
+  function next() { current = (current + 1) % items.length; show(); }
+
+  // Click on gallery item → open
+  document.querySelectorAll('#galGrid .gal-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const all   = visibleItems();
+      const index = all.indexOf(item);
+      if (index >= 0) open(index);
+    });
+  });
+
+  // Controls
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); prev(); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); next(); });
+
+  // Close on backdrop click
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+  // Keyboard: ESC, arrows
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+  // Touch swipe (mobile)
+  let touchStartX = 0;
+  lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    dx < 0 ? next() : prev();
+  });
+}
+
+/* ───────────────────────────────────────
    CONTACT FORM (demo — no real send)
 ─────────────────────────────────────── */
 function initForm() {
@@ -730,6 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCounters();
   initGallery();
+  initLightbox();
   initForm();
   initHeroBg();
 
