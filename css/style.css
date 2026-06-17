@@ -387,6 +387,7 @@ input, textarea, select {
   margin-bottom: 1.2rem;
   opacity: 0;
   animation: fadeUp 0.9s 0.2s forwards;
+  text-shadow: 0 1px 8px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,0.8);
 }
 
 .hero-title {
@@ -403,8 +404,12 @@ input, textarea, select {
 .hero-title-top {
   font-size: clamp(2.4rem, 7vw, 5.5rem);
   letter-spacing: 0.2em;
-  color: var(--txt-mid);
+  color: var(--txt-hi);
   font-weight: 400;
+  text-shadow:
+    0 2px 12px rgba(0,0,0,1),
+    0 4px 32px rgba(0,0,0,0.9),
+    0 0  60px rgba(0,0,0,0.7);
 }
 .hero-title-main {
   font-size: clamp(3rem, 9vw, 7rem);
@@ -413,15 +418,20 @@ input, textarea, select {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* drop-shadow funguje na gradient text, text-shadow ne */
+  filter:
+    drop-shadow(0 2px 8px rgba(0,0,0,1))
+    drop-shadow(0 4px 24px rgba(0,0,0,0.95));
 }
 
 .hero-desc {
   font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-  color: var(--txt-mid);
+  color: var(--txt-main);
   max-width: 54ch;
   margin: 0 auto 2.2rem;
   opacity: 0;
   animation: fadeUp 0.9s 0.7s forwards;
+  text-shadow: 0 1px 6px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8);
 }
 
 .hero-cta-group {
