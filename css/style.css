@@ -520,36 +520,61 @@ input, textarea, select {
 
 .about-img-wrap {
   position: relative;
+  padding-bottom: 3.5rem;
 }
-.about-img {
-  aspect-ratio: 4/5;
+
+/* Main tall portrait */
+.about-img-main {
+  aspect-ratio: 3/4;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
-.about-img::after {
+.about-img-main::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(232,93,4,0.06) 0%, transparent 60%);
+  pointer-events: none;
 }
-.about-img::before {
-  content: '';
+
+/* Shop/workshop photo — overlapping bottom-right accent */
+.about-img-shop {
   position: absolute;
-  inset: 0;
-  border: 1px solid var(--border);
+  bottom: 0;
+  right: -1.5rem;
+  width: 62%;
+  aspect-ratio: 4/3;
+  background-size: cover;
+  background-position: center;
   border-radius: 2px;
-  z-index: 1;
+  border: 3px solid var(--bg-base);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+  overflow: hidden;
+  z-index: 2;
+}
+.shop-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.5rem 0.8rem;
+  background: rgba(8,6,4,0.82);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ember-light);
+  backdrop-filter: blur(4px);
 }
 
 .about-badge {
   position: absolute;
-  bottom: -1.5rem;
-  right: -1.5rem;
-  width: 100px;
-  height: 100px;
+  top: 1.2rem;
+  left: -1.2rem;
+  width: 90px;
+  height: 90px;
   background: var(--ember);
   border-radius: 50%;
   display: flex;
@@ -557,7 +582,8 @@ input, textarea, select {
   align-items: center;
   justify-content: center;
   box-shadow: var(--glow-ember);
-  z-index: 2;
+  z-index: 3;
+  border: 3px solid var(--bg-base);
 }
 .badge-num {
   font-family: var(--font-head);
@@ -1174,7 +1200,9 @@ input, textarea, select {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  .about-img-wrap { max-width: 480px; margin: 0 auto; }
+  .about-img-wrap { max-width: 480px; margin: 0 auto; padding-bottom: 3rem; }
+  .about-img-shop { right: 0; width: 55%; }
+  .about-badge { left: 0; top: 1rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-social { grid-column: 1 / -1; }
