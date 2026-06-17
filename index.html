@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="sl" data-lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kovinarsko atelje Breznik — Ročna kovačija in umetno kovinarstvo iz srca Gorenjske">
+  <title>Kovinarsko atelje Breznik | Umetna kovačija</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Site Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-anvil">⚒</span>
+        <div class="logo-text">
+          <span class="logo-main">Breznik</span>
+          <span class="logo-sub" data-tr="logo_sub">Kovinarsko atelje</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#o-nas"   data-tr="nav_about">O nas</a></li>
+        <li><a href="#zgodba"  data-tr="nav_story">Naša zgodba</a></li>
+        <li><a href="#galerija" data-tr="nav_gallery">Galerija</a></li>
+        <li><a href="#storitve" data-tr="nav_services">Storitve</a></li>
+        <li><a href="#kontakt"  data-tr="nav_contact">Kontakt</a></li>
+        <li>
+          <button class="lang-btn" id="langBtn" aria-label="Switch language">
+            <span id="langLabel">EN</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero">
+    <!-- Sparks canvas — animated fire sparks -->
+    <canvas id="sparksCanvas" aria-hidden="true"></canvas>
+
+    <!-- Background image -->
+    <div class="hero-bg" style="background-image:url('./public/images/hero-bg.jpg')"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Forge glow pulse at bottom -->
+    <div class="hero-forge-glow" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-tr="hero_eyebrow">Umetnost ognja in kovine</p>
+      <h1 class="hero-title">
+        <span class="hero-title-top">Kovinarsko</span>
+        <span class="hero-title-main">atelje Breznik</span>
+      </h1>
+      <p class="hero-desc" data-tr="hero_desc">
+        Ročno kovano železo z dušo — od elegantnih ograj do monumentalnih umetniških del
+      </p>
+      <div class="hero-cta-group">
+        <a href="#galerija" class="btn btn-ember" data-tr="hero_cta1">Oglej si galerijo</a>
+        <a href="#kontakt"  class="btn btn-ghost" data-tr="hero_cta2">Povpraši nas</a>
+      </div>
+    </div>
+
+    <a href="#o-nas" class="hero-scroll" aria-label="Pomakni navzdol">
+      <div class="scroll-chevron"></div>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       STATS BANNER
+  ═══════════════════════════════════════════ -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat">
+      <span class="stat-num" data-count="35">0</span><span class="stat-plus">+</span>
+      <span class="stat-lbl" data-tr="stat_years">let izkušenj</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-num" data-count="1200">0</span><span class="stat-plus">+</span>
+      <span class="stat-lbl" data-tr="stat_pieces">unikatnih kosov</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-num" data-count="8">0</span>
+      <span class="stat-lbl" data-tr="stat_countries">držav</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-num" data-count="100">0</span><span class="stat-plus">%</span>
+      <span class="stat-lbl" data-tr="stat_hand">ročno delo</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       O NAS / ABOUT
+  ═══════════════════════════════════════════ -->
+  <section id="o-nas" class="section">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-img-wrap reveal">
+          <div class="about-img" style="background-image:url('./public/images/about-forge.jpg')"></div>
+          <div class="about-badge">
+            <span class="badge-num">1988</span>
+            <span class="badge-lbl" data-tr="badge_since">Ustanovljeno</span>
+          </div>
+        </div>
+
+        <div class="about-text reveal">
+          <span class="eyebrow" data-tr="about_label">O nas</span>
+          <h2 class="section-title" data-tr="about_title">Kovačija z dušo in tradicijo</h2>
+          <p data-tr="about_p1">
+            Kovinarsko atelje Breznik je ročna kovačija s sedežem v srcu Gorenjske. Z več kot tremi desetletji izkušenj ustvarjamo unikatne kovane predmete, ki združujejo starodavno obrt z modernim dizajnom.
+          </p>
+          <p data-tr="about_p2">
+            Vsak kos, ki zapusti našo delavnico, je sad ur predanega dela, natančnosti in ljubezni do kovine. Delamo izključno po naročilu — od enostavnih ročajev do kompleksnih ograj, vrat in umetniških instalacij.
+          </p>
+          <div class="feature-list">
+            <div class="feature">
+              <div class="feature-icon">⚒</div>
+              <div>
+                <h4 data-tr="feat1_h">100% ročno delo</h4>
+                <p data-tr="feat1_p">Vsak kos obdelamo ročno v naši delavnici</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🔥</div>
+              <div>
+                <h4 data-tr="feat2_h">Tradicionalne metode</h4>
+                <p data-tr="feat2_p">Ohranjamo starodavno znanje kovačije</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">✦</div>
+              <div>
+                <h4 data-tr="feat3_h">Unikatni dizajn</h4>
+                <p data-tr="feat3_p">Vsak kos je edinstvena umetnina</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ZGODBA / STORY
+  ═══════════════════════════════════════════ -->
+  <section id="zgodba" class="section section-story">
+    <div class="story-bg" style="background-image:url('./public/images/story-bg.jpg')"></div>
+    <div class="story-overlay"></div>
+    <div class="container">
+      <div class="story-inner reveal">
+        <span class="eyebrow light" data-tr="story_label">Naša zgodba</span>
+        <h2 class="section-title light" data-tr="story_title">Tri generacije ognja in jekla</h2>
+        <div class="story-cols">
+          <p data-tr="story_p1">
+            Zgodba Kovinarskega ateljeja Breznik se začne leta 1988, ko je Franc Breznik v majhni delavnici v Gorenjski dolini prvič prižgal oganj pod kladivom. Naučil se je rokodelstva pri svojem očetu in ga združil z lastno vizijo — kovinarstvo ne sme biti le obrt, ampak umetnost.
+          </p>
+          <p data-tr="story_p2">
+            Danes atelje vodi njegova hčerka Maja Breznik, ki je tradicijo obogatila z modernimi dizajnerskimi pristopi, ne da bi izgubila tisto, kar nas ločuje od masovne proizvodnje: vsak kos nastane pod enim samim parom rok, od surovega jekla do končnega izdelka.
+          </p>
+        </div>
+        <p class="story-bottom" data-tr="story_p3">
+          Naši kovaški izdelki krasijo domove, hotele in javne prostore po vsej Evropi. A ne glede na velikost naročila ostajamo zvesti enakemu principu: kvaliteta, ki jo čutiš ob dotiku. Obrt, ki jo vidiš v vsakem detajlu.
+        </p>
+        <a href="#kontakt" class="btn btn-ember mt-lg" data-tr="story_cta">Začni projekt z nami</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       GALERIJA / GALLERY
+  ═══════════════════════════════════════════ -->
+  <section id="galerija" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-tr="gal_label">Naše delo</span>
+        <h2 class="section-title" data-tr="gal_title">Galerija del</h2>
+        <p class="section-lead" data-tr="gal_lead">Vsak projekt je unikat — oglejte si le nekatera izmed naših del</p>
+      </div>
+
+      <div class="gal-filters reveal">
+        <button class="gal-filter active" data-cat="all"      data-tr="gf_all">Vse</button>
+        <button class="gal-filter"        data-cat="ograje"   data-tr="gf_rail">Ograje</button>
+        <button class="gal-filter"        data-cat="vrata"    data-tr="gf_gate">Vrata &amp; portali</button>
+        <button class="gal-filter"        data-cat="dekor"    data-tr="gf_decor">Dekoracija</button>
+        <button class="gal-filter"        data-cat="pohistvo" data-tr="gf_furn">Pohištvo</button>
+      </div>
+
+      <div class="gal-grid" id="galGrid">
+
+        <div class="gal-item" data-cat="ograje">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-1.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g1_h">Kovana balkonska ograja</h3>
+              <p data-tr="g1_p">Klasičen motiv s spiralami, vroče cinkano</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item gal-tall" data-cat="vrata">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-2.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g2_h">Vhodna vrata z ornamentom</h3>
+              <p data-tr="g2_p">Kovano železo z bronastimi detajli</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item" data-cat="dekor">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-3.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g3_h">Stenska umetnina — jelen</h3>
+              <p data-tr="g3_p">Ročno kovana dekoracija za notranjost</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item" data-cat="pohistvo">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-4.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g4_h">Jedilna miza — jeklo &amp; hrast</h3>
+              <p data-tr="g4_p">Kombinacija kovine in masivnega lesa</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item gal-wide" data-cat="ograje">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-5.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g5_h">Stopniščna ograja — modern</h3>
+              <p data-tr="g5_p">Minimalistični dizajn z ravnimi linijami</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item" data-cat="dekor">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-6.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g6_h">Kovaški svečnik</h3>
+              <p data-tr="g6_p">Unikatni svečnik za restavracijo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item" data-cat="vrata">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-7.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g7_h">Portalni lok</h3>
+              <p data-tr="g7_p">Monumentalni lok s klasičnim ornamentom</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gal-item" data-cat="pohistvo">
+          <div class="gal-img" style="background-image:url('./public/images/gallery-8.jpg')">
+            <div class="gal-cap">
+              <h3 data-tr="g8_h">Pisalna miza — kovano podnožje</h3>
+              <p data-tr="g8_p">Industrijski dizajn z leseno ploščo</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       STORITVE / SERVICES
+  ═══════════════════════════════════════════ -->
+  <section id="storitve" class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-tr="svc_label">Storitve</span>
+        <h2 class="section-title" data-tr="svc_title">Kaj ustvarjamo po naročilu</h2>
+        <p class="section-lead" data-tr="svc_lead">Specializiramo se za ročno kovane produkte, prilagojene točno vašim željam in prostoru</p>
+      </div>
+
+      <div class="svc-grid">
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">⛩</div>
+          <h3 data-tr="s1_h">Vrata &amp; portali</h3>
+          <p data-tr="s1_p">Vhodna vrata za hiše in vile, portalni loki, vrtnska vrata. Klasičen ali sodoben dizajn po vaših željah.</p>
+          <ul>
+            <li data-tr="s1_l1">Vhodna vrata hiš</li>
+            <li data-tr="s1_l2">Vrtnska vrata in ograje</li>
+            <li data-tr="s1_l3">Garažna vrata</li>
+            <li data-tr="s1_l4">Portalni loki</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">🪜</div>
+          <h3 data-tr="s2_h">Ograje &amp; stopnišča</h3>
+          <p data-tr="s2_p">Balkonske in stopniščne ograje, terasne ograje — od elegantno klasičnih do modernih minimalističnih linij.</p>
+          <ul>
+            <li data-tr="s2_l1">Balkonske ograje</li>
+            <li data-tr="s2_l2">Stopniščne ograje</li>
+            <li data-tr="s2_l3">Terasne ograje</li>
+            <li data-tr="s2_l4">Notranje pregradne ograje</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">✦</div>
+          <h3 data-tr="s3_h">Notranja dekoracija</h3>
+          <p data-tr="s3_p">Unikatni kovaški elementi za notranjost: svečniki, stenski okraski, kljuke, ročaji, pohištveni okov.</p>
+          <ul>
+            <li data-tr="s3_l1">Svečniki in svetilke</li>
+            <li data-tr="s3_l2">Stenski okraski</li>
+            <li data-tr="s3_l3">Pohištveni okov</li>
+            <li data-tr="s3_l4">Kljuke in ročaji</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">🌿</div>
+          <h3 data-tr="s4_h">Vrtna arhitektura</h3>
+          <p data-tr="s4_p">Pergole, loki, okrasni kovaški elementi za vrt — trpežni in estetski, za vsak stil vrta.</p>
+          <ul>
+            <li data-tr="s4_l1">Pergole in loki</li>
+            <li data-tr="s4_l2">Vrtne skulpture</li>
+            <li data-tr="s4_l3">Žardinjere</li>
+            <li data-tr="s4_l4">Okrasne ograje</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">🪑</div>
+          <h3 data-tr="s5_h">Pohištvo po meri</h3>
+          <p data-tr="s5_p">Mize, stoli, police z kovaškimi detajli — industrijski in rustikalni stil, kovinski ali kombiniran.</p>
+          <ul>
+            <li data-tr="s5_l1">Jedilne in pisalne mize</li>
+            <li data-tr="s5_l2">Kovaška podnožja</li>
+            <li data-tr="s5_l3">Kovinski stoli</li>
+            <li data-tr="s5_l4">Police in konzole</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">🏛</div>
+          <h3 data-tr="s6_h">Javni &amp; poslovni prostori</h3>
+          <p data-tr="s6_p">Večje instalacije za hotele, restavracije, pisarne in javne prostore — od manjših akcentov do monumentalnih del.</p>
+          <ul>
+            <li data-tr="s6_l1">Hotelski in restavracijski dekor</li>
+            <li data-tr="s6_l2">Pisarniška signalizacija</li>
+            <li data-tr="s6_l3">Javne skulpture</li>
+            <li data-tr="s6_l4">Arhitekturni elementi</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="svc-cta reveal">
+        <p data-tr="svc_cta_txt">Imate posebno idejo? Skupaj jo uresničimo.</p>
+        <a href="#kontakt" class="btn btn-ember btn-lg" data-tr="svc_cta_btn">Pošljite povpraševanje</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       KONTAKT / CONTACT
+  ═══════════════════════════════════════════ -->
+  <section id="kontakt" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-tr="con_label">Kontakt</span>
+        <h2 class="section-title" data-tr="con_title">Začnimo pogovor</h2>
+        <p class="section-lead" data-tr="con_lead">Vsak projekt se začne z idejo — povejte nam svojo</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Form -->
+        <div class="contact-form-wrap reveal">
+          <form id="contactForm" novalidate>
+            <div class="field">
+              <label for="fname" data-tr="f_name">Vaše ime</label>
+              <input type="text" id="fname" name="name" placeholder="Janez Novak" required>
+            </div>
+            <div class="field">
+              <label for="femail" data-tr="f_email">E-pošta</label>
+              <input type="email" id="femail" name="email" placeholder="janez@primer.si" required>
+            </div>
+            <div class="field">
+              <label for="fphone" data-tr="f_phone">Telefon <span data-tr="f_optional">(neobvezno)</span></label>
+              <input type="tel" id="fphone" name="phone" placeholder="+386 31 123 456">
+            </div>
+            <div class="field">
+              <label for="fservice" data-tr="f_svc">Vrsta storitve</label>
+              <select id="fservice" name="service">
+                <option value=""        data-tr="fo_0">Izberite...</option>
+                <option value="vrata"   data-tr="fo_1">Vrata &amp; portali</option>
+                <option value="ograje"  data-tr="fo_2">Ograje &amp; stopnišča</option>
+                <option value="dekor"   data-tr="fo_3">Notranja dekoracija</option>
+                <option value="vrt"     data-tr="fo_4">Vrtna arhitektura</option>
+                <option value="pohist"  data-tr="fo_5">Pohištvo po meri</option>
+                <option value="javno"   data-tr="fo_6">Javni prostori</option>
+                <option value="drugo"   data-tr="fo_7">Drugo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fmsg" data-tr="f_msg">Opišite projekt</label>
+              <textarea id="fmsg" name="message" rows="5" placeholder="Opišite svojo idejo, dimenzije, material, rok..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-ember btn-full" data-tr="f_send">Pošlji povpraševanje</button>
+            <p class="form-note" data-tr="f_note">Odgovorimo v roku 24 ur — delovni dnevi</p>
+            <div id="formMsg" class="form-feedback" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <!-- Info + Map -->
+        <div class="contact-side reveal">
+          <div class="contact-info">
+            <div class="cinfo-item">
+              <span class="cinfo-icon">📍</span>
+              <div>
+                <h4 data-tr="ci_loc">Lokacija</h4>
+                <p>Radovljica, Gorenjska</p>
+                <p class="cinfo-note" data-tr="ci_loc_note">Točen naslov sporočimo ob dogovoru</p>
+              </div>
+            </div>
+            <div class="cinfo-item">
+              <span class="cinfo-icon">📞</span>
+              <div>
+                <h4 data-tr="ci_tel">Telefon</h4>
+                <p>+386 51 234 567</p>
+              </div>
+            </div>
+            <div class="cinfo-item">
+              <span class="cinfo-icon">✉</span>
+              <div>
+                <h4 data-tr="ci_mail">E-pošta</h4>
+                <p>atelje@breznik-kovinarstvo.si</p>
+              </div>
+            </div>
+            <div class="cinfo-item">
+              <span class="cinfo-icon">⏰</span>
+              <div>
+                <h4 data-tr="ci_hrs">Delovni čas</h4>
+                <p data-tr="ci_hrs1">Pon–Pet: 8:00 – 17:00</p>
+                <p data-tr="ci_hrs2">Sob: 8:00 – 12:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-wrap">
+            <div id="map"></div>
+            <p class="map-note" data-tr="map_note">Točen naslov sporočimo ob dogovoru.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">⚒ Kovinarsko atelje Breznik</span>
+        <p class="footer-tagline" data-tr="ft_tagline">Ročno kovano. Z dušo. Od 1988.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#o-nas"    data-tr="nav_about">O nas</a>
+        <a href="#galerija" data-tr="nav_gallery">Galerija</a>
+        <a href="#storitve" data-tr="nav_services">Storitve</a>
+        <a href="#kontakt"  data-tr="nav_contact">Kontakt</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="Pinterest" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.76 1.23-5.22 1.23-5.22s-.31-.63-.31-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.24 0-2.17-1.47-3.68-3.56-3.68-2.43 0-3.85 1.82-3.85 3.7 0 .73.28 1.51.63 1.94.07.08.08.15.06.24-.06.27-.2.85-.23.97-.04.16-.13.19-.3.11-1.11-.52-1.81-2.14-1.81-3.45 0-2.8 2.03-5.37 5.86-5.37 3.08 0 5.47 2.19 5.47 5.12 0 3.05-1.92 5.5-4.59 5.5-.9 0-1.74-.47-2.03-1.02l-.55 2.07c-.2.77-.74 1.73-1.1 2.32.83.26 1.71.4 2.62.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Kovinarsko atelje Breznik. <span data-tr="ft_rights">Vse pravice pridržane.</span></p>
+      <p class="footer-demo">Ta spletna stran je demonstracijski primer. / This is a fictional portfolio project.</p>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- App JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
