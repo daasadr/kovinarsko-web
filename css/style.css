@@ -789,31 +789,6 @@ input, textarea, select {
 }
 .gal-item:hover .gal-img { transform: scale(1.06); }
 
-.gal-cap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
-  background: linear-gradient(to top, rgba(8,6,4,0.9) 0%, rgba(8,6,4,0.3) 50%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.35s;
-}
-.gal-item:hover .gal-cap { opacity: 1; }
-
-.gal-cap h3 {
-  font-family: var(--font-head);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--txt-hi);
-  margin-bottom: 0.3rem;
-}
-.gal-cap p {
-  font-size: 0.78rem;
-  color: var(--txt-mid);
-}
 
 /* ───────────────────────────────────────
    11. SERVICES
@@ -1177,16 +1152,22 @@ input, textarea, select {
 ─────────────────────────────────────── */
 .gal-item { cursor: zoom-in; }
 
-/* Zoom hint icon in gallery caption */
-.gal-cap::after {
+/* Zoom hint — appears on hover over gallery item */
+.gal-item::after {
   content: '⊕';
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.3rem;
-  color: rgba(240,232,220,0.5);
-  line-height: 1;
+  top: 0.9rem;
+  right: 0.9rem;
+  font-size: 1.4rem;
+  color: rgba(240,232,220,0);
+  transition: color 0.3s;
   pointer-events: none;
+  z-index: 2;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  line-height: 1;
+}
+.gal-item:hover::after {
+  color: rgba(240,232,220,0.75);
 }
 
 .lightbox {
@@ -1230,23 +1211,7 @@ input, textarea, select {
   border: 1px solid var(--border-dim);
 }
 
-.lightbox-cap {
-  margin-top: 1.1rem;
-  text-align: center;
-  padding: 0 1rem;
-}
-.lightbox-cap h3 {
-  font-family: var(--font-head);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--txt-hi);
-  margin-bottom: 0.25rem;
-}
-.lightbox-cap p {
-  font-size: 0.78rem;
-  color: var(--txt-mid);
-}
+.lightbox-cap { display: none; }
 
 .lightbox-close {
   position: fixed;
