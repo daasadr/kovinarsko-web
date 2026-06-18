@@ -684,7 +684,7 @@ function initLightbox() {
     <button class="lightbox-close" id="lbClose" aria-label="Zapri">✕</button>
     <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Prejšnji">&#8592;</button>
     <div class="lightbox-wrap">
-      <img class="lightbox-img" id="lbImg" src="" alt="">
+      <img class="lightbox-img" id="lbImg" src="" alt="" decoding="async">
       <div class="lightbox-cap">
         <h3 id="lbTitle"></h3>
         <p  id="lbDesc"></p>

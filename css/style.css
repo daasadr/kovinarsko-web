@@ -357,6 +357,7 @@ input, textarea, select {
   background: radial-gradient(ellipse at 50% 100%, rgba(232,93,4,0.25) 0%, rgba(250,163,7,0.08) 45%, transparent 70%);
   animation: forgeBreath 3.5s ease-in-out infinite;
   pointer-events: none;
+  will-change: opacity, transform;
 }
 @keyframes forgeBreath {
   0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1); }
@@ -368,6 +369,7 @@ input, textarea, select {
   inset: 0;
   pointer-events: none;
   z-index: 2;
+  will-change: contents;
 }
 
 .hero-content {
